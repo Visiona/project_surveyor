@@ -1,0 +1,2 @@
+class RangeQAndC < ApplicationRecord
+end

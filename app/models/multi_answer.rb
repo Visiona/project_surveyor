@@ -1,0 +1,2 @@
+class MultiAnswer < ApplicationRecord
+end

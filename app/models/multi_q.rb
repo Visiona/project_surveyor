@@ -1,0 +1,2 @@
+class MultiQ < ApplicationRecord
+end
