@@ -8,5 +8,6 @@ class CreateMultiAnswers < ActiveRecord::Migration[5.0]
       t.timestamps
     end
       add_index :multi_answers, [:user_id, :choice_id, :multi_q_id], unique: true
+      add_foreign_key :multi_answers, :multi_q
   end
 end
