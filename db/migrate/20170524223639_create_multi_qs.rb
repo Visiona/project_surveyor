@@ -6,6 +6,6 @@ class CreateMultiQs < ActiveRecord::Migration[5.0]
 
       t.timestamps
     end
-    add_index :range_q_and_cs, [:question, :survey_id]
+    add_index :multi_qs, [:question, :survey_id]
   end
 end

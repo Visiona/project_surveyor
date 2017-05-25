@@ -1,3 +1,10 @@
+GIT
+  remote: https://github.com/stympy/faker.git
+  revision: ebf26149bf63c0d079e01c98e5bc226e33edd437
+  specs:
+    faker (1.8.0)
+      i18n (~> 0.5)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -63,8 +70,6 @@ GEM
       unicode_utils (~> 1.4)
     erubis (2.7.0)
     execjs (2.7.0)
-    faker (1.7.3)
-      i18n (~> 0.5)
     ffi (1.9.18)
     globalid (0.4.0)
       activesupport (>= 4.2.0)
@@ -118,7 +123,7 @@ GEM
       pry (>= 0.10.4)
     puma (3.8.2)
     rack (2.0.3)
-    rack-mini-profiler (0.10.2)
+    rack-mini-profiler (0.10.5)
       rack (>= 1.2.0)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -190,7 +195,7 @@ GEM
     websocket-driver (0.6.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.2)
-    yard (0.9.8)
+    yard (0.9.9)
 
 PLATFORMS
   ruby
@@ -200,7 +205,7 @@ DEPENDENCIES
   bullet
   byebug
   coffee-rails (~> 4.2)
-  faker
+  faker!
   hirb
   jazz_fingers
   jbuilder (~> 2.5)

@@ -6,4 +6,73 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+puts "Destroying old records"
+
+
+#building related
+Survey.destroy_all
+Choice.destroy_all
+MultiQ.destroy_all
+RangeQAndC.destroy_all
+
+#using related
+User.destroy_all
+MultiAnswer.destroy_all
+RangeAnswer.destroy_all
+
+
+puts "Old records destroyed"
+
+
+puts "Survey building"
+3.times do 
+  s = Survey.new
+  s[:title] = Faker::Coffee.blend_name
+  s[:description] = Faker::Coffee.notes
+  s.save
+end
+
+
+
+puts "Multi Questions building"
+Survey.all.each do |sur|
+  10.times do
+    m = MultiQ.new
+    m[:question] = Faker::TwinPeaks.quote + " ?"
+    m[:survey_id] = sur.id
+    m.save
+  end
+end
+
+puts "Choice Building"
+MultiQ.all.each do |m|
+  no_of_choices = rand(2..7)
+  no_of_choices.times do
+    c = Choice.new
+    c[:multi_q_id] = m.id
+    c[:name] = Faker::Space.star
+    c.save
+  end
+end
+
+puts "Ignoring Range questions"
+
+puts "Building users and their answers"
+Survey.all.each do |sur|
+  5.times do
+    u = User.new
+    u.save
+    MultiQ.all.where(:survey_id => sur.id).each do |mq|
+      ma = MultiAnswer.new
+      ma[:user_id] = u.id
+      ma[:choice_id] = Choice.all.where(:multi_q_id => mq.id).pluck(:id).sample
+      ma[:multi_q_id] = mq.id
+      ma.save!
+    end
+  end
+end
+
+
+
+puts "DONE!"
 

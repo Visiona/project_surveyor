@@ -7,7 +7,7 @@ class CreateRangeAnswers < ActiveRecord::Migration[5.0]
 
       t.timestamps
     end
-    add_index :range_answers, [:user_id, :value, :range_q_and_c_id], unique: true
-    add_foreign_key :range_answers, :range_q_and_c
+    add_index :range_answers, [:user_id, :range_q_and_c_id], unique: true
+    add_foreign_key :range_answers, :range_q_and_cs
   end
 end
