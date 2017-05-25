@@ -13,3 +13,26 @@
  *= require_tree .
  *= require_self
  */
+
+
+
+/*
+========================
+LAYOUT
+========================*/
+
+
+div.centralize {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-43%, -100%);
+}
+
+div.layout-wrapper {
+  min-width: 576px;
+  margin: 20px;
+}
+
+
+
