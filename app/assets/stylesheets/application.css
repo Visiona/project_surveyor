@@ -29,8 +29,11 @@ div.centralize {
 }
 
 div.layout-wrapper {
-  min-width: 536px;
-  margin: 20px;
+  min-width: 486px;
+  margin: 5px 20px;
 }
 
+li a {
+  text-decoration: underline;
+}
 
