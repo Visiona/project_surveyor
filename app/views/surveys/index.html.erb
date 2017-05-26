@@ -1,12 +1,33 @@
 
 
-<H1>Surveyor:</H1>
-<H1>Tell Me #allthethings!</H1>
+<H1>
+  Surveyor:
+</H1>
+<H1>
+  Tell Me #allthethings!
+</H1>
+<br>
+<p>
+  Click on a survey below totake it or create one of your own!
+</p>
 
-<p>Click on a survey below totake it or create one of your own!</p>
+<div class="big-button-wrapper">
+  <%= link_to "Create a New Survey", new_survey_path, class: "btn btn-primary btn-group btn-group-lg" %>
+</div>
 
-<BUTTON>
-  Create a New Survey
-</BUTTON>
+<H4>Take a Survey</H4>
 
-<%= link_to "Take a Survey", new_survey_path %>
+<% if @surveys.any? %>
+  <ol>
+  <% @surveys.each do |sur| %>
+    <li><%= sur.title %></li>
+    <div class = "survey-list-wrapper">
+
+      <p><%= sur.description %></p>
+      <p class="response"> <%= sur.users.count %>  Responses</p>
+      <%= link_to "Take Survey", "", class: "btn btn-outline-secondary" %>
+      <%= link_to "View Results", "",class: "btn btn-outline-secondary" %>
+    </div>
+  <% end %>
+  </ol>
+<% end %>
