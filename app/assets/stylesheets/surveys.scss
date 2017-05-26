@@ -35,5 +35,21 @@ p.response {
   font-style: italic;
 }
 
+label.big-fields-labels {
+  font-size: 20px;
+  font-weight: 600;
+}
 
+span.bar { 
+  font-size: 20px;
+  color: #444;
+}
+
+ol.survey-builder {
+  text-align: center;
+  list-style-type: decimal;
+  li {
+      display: inline;
+  }
+}
 

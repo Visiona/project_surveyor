@@ -1,0 +1,33 @@
+
+<H1>
+  Survey Builder
+</H1>
+<hr>
+<ol class="survey-builder">
+  <li class="">
+    <span>Build Survey</span>
+  </li>
+    <span class="bar">|</span>
+  <li class="">
+    <span class="page-inactive">Add Questions</span>
+  </li>
+</ol>
+<p>
+  First choose a title and a description for your survey.
+</p>
+
+<%= form_for( @survey, html: { :class => "" } ) do |f| %>
+  <div class="form-group">
+    <%= f.label :title, "Survey Title", class: "big-fields-labels" %>
+    <%= f.text_field :title, class: "form-control", :placeholder => "eg. 'The Personality test' " %>
+  </div>
+  <div class="form-group">
+    <%= f.label :description, "Survey Description", class: "big-fields-labels" %>
+    <%= f.text_area :description, class: "form-control", :rows => '7', :placeholder => "eg. 'Discovering what is unique and special about you all people' " %>
+  </div>
+  <div class="big-button-wrapper">
+    <%= f.submit "Create Survey and Begin Adding Questions", class: "btn btn-primary btn-group btn-group-lg" %>
+  </div>
+<% end %>
+
+
