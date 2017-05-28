@@ -7,6 +7,8 @@ class MultiqsController < ApplicationController
 
   def new
     @multiq = MultiQ.new
+    @survey = Survey.all.where(:id => params['survey_id'])[0]
+    @multiqs = MultiQ.all.where(:survey_id => @survey.id)
   end
 
   def create
@@ -23,6 +25,11 @@ class MultiqsController < ApplicationController
       @multianswer = MultiAnswer.new
       render 'new'
     end
+  end
+
+  def edit
+    @survey = Survey.find(params[:id])
+    @multiqs = MultiQ.all.where(:survey_id => @survey.id)[0]
   end
 
 

@@ -1,4 +1,5 @@
 
+
 <H1>
   Survey Builder
 </H1>
@@ -70,7 +71,6 @@
       <%= submit_tag "Add a New Question", class: "btn btn-primary btn-group btn-group-lg" %>
     </div>
   <% end %>
-  <% end %>
 </div>
 
 <hr class="bold">
@@ -79,7 +79,7 @@
   <p class="big-fields-labels">
     Existing Questions:
   </p>
-  <% if @multiq.present? && @multiq.id != nil %>
+  <% if @multiq.present? %>
     <% @multiq.each do |m| %>
       <%= m.id %>
       <%= m.survey_id %>
