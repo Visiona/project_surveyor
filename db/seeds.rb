@@ -40,6 +40,8 @@ Survey.all.each do |sur|
     m = MultiQ.new
     m[:question] = Faker::TwinPeaks.quote + " ?"
     m[:survey_id] = sur.id
+    m[:required] = [true, false].sample
+    m[:multiple] = [true, false].sample
     m.save
   end
 end
@@ -60,11 +62,12 @@ puts "Ignoring Range questions"
 puts "Building users and their answers"
 Survey.all.each do |sur|
   5.times do
-    u = User.new
-    u.save
+    person = User.new
+    person.save
+    puts "DBG: person = #{person.inspect}"
     MultiQ.all.where(:survey_id => sur.id).each do |mq|
       ma = MultiAnswer.new
-      ma[:user_id] = u.id
+      ma[:user_id] = person.id
       ma[:choice_id] = Choice.all.where(:multi_q_id => mq.id).pluck(:id).sample
       ma[:multi_q_id] = mq.id
       ma.save!

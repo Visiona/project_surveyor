@@ -1,0 +1,2 @@
+module MultiqsHelper
+end

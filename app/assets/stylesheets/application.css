@@ -22,11 +22,13 @@ LAYOUT
 ========================*/
 
 div.centralize {
-  position: fixed;
+/*  position: fixed;
   top: 0%;
   left: 50%;
-  transform: translate(-43%, 0%);
-  margin-top: 30px;
+  transform: translate(-43%, 0%);*/
+  width: 486px;
+  margin: 30px auto;
+/*  margin-top: 30px;*/
 }
 
 div.layout-wrapper {

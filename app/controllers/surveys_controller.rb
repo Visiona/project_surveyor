@@ -9,11 +9,16 @@ class SurveysController < ApplicationController
     @survey = Survey.new
   end
 
+  def show
+    @survey = Survey.find(params[:id])
+    @multiqs = MultiQ.all.where(:survey_id => @survey.id)
+  end
+
   def create
     @survey = Survey.new(whitelisted_user_params)
     if @survey.save
       flash[:success] = "New Survey initiated"
-      redirect_to root_path #possibly /survey/questions ??
+      redirect_to survey_path(@survey)
     else
       flash.now[:danger] = "New Survey could not be initiated."
       render 'new'

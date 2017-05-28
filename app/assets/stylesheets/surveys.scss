@@ -31,7 +31,7 @@ div.survey-list-wrapper {
   margin: 5px 0;
 }
 
-p.response {
+p.response, label.response {
   font-style: italic;
 }
 
@@ -51,5 +51,13 @@ ol.survey-builder {
   li {
       display: inline;
   }
+}
+
+div.q-box-wrapper {
+  padding: 10px 0;
+}
+
+hr.bold {
+  border: 1px solid #888;
 }
 
