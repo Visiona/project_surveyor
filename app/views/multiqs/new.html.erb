@@ -33,7 +33,7 @@
 
 <hr class="bold">
 <H3>
-  Add a ultiple Choice of Question:
+  Add a multiple Choice of Question:
 </H3>
 <hr class="bold">
 <ol class="survey-builder">
@@ -47,29 +47,27 @@
 </ol>
 
 <div class = "q-box-wrapper">
-<%= form_for @survey do |survey_fields| %>
-  <%= survey_fields.fields_for :multi_q do |multi_q_field| %>
+  <%= form_for(@multiq, :url => new_survey_add_question_path) do |f| %>
     <div class="form-group">
-      <%= label_tag :no_options, "How many options should the question have?", class: "response" %>
-      <%= select_tag :no_options, options_for_select([1,2,3,4,5], "1"), :class => "form-control" %>
+      <p class="response">How many options should the question have?</p>
+      <%= select_tag :no_options, options_for_select([1,2,3,4,5,6,7]), :class => "form-control" %>
 
-      <%= label_tag :choice_no, "How many options can be selected?", class: "response" %>
-        <%= radio_button_tag(:choice_no, "one") %>
-        <%= label_tag(:choice_no_one, "Just One") %>
-        <%= radio_button_tag(:choice_no, "adult") %>
-        <%= label_tag(:choice_no_multi, "multi") %>
+      <p class="response">How many options can be selected?</p>
+        <%= f.radio_button(:multiple, false) %>
+        <%= label :multiple, "Just One" %><br>
+        <%= f.radio_button(:multiple, true) %>
+        <%= label :multiple, "Multiple" %>
 
-      <%= label_tag :choice_req, "Is the question required", class: "response" %>
-        <%= radio_button_tag(:choice_req, "one") %>
-        <%= label_tag(:choice_req_yes, "Yes") %>
-        <%= radio_button_tag(:choice_req, "adult") %>
-        <%= label_tag(:choice_req_no, "No") %>
+      <p class="response">Is the question required?</p>
+      <%= f.radio_button(:required, true) %>
+      <%= label :required, "Yes" %><br>
+      <%= f.radio_button(:required, false) %>
+      <%= label :required, "No" %><br>
 
     </div>
     <div class="big-button-wrapper">
-      <%= submit_tag "Add a New Question", class: "btn btn-primary btn-group btn-group-lg" %>
+      <%= f.submit "Add a New Question", class: "btn btn-primary btn-group btn-group-lg" %>
     </div>
-  <% end %>
   <% end %>
 </div>
 

@@ -5,20 +5,18 @@ class SurveysController < ApplicationController
     @surveys = Survey.all
   end
 
+  def show
+  end
+
   def new
     @survey = Survey.new
   end
 
-  def show
-    @survey = Survey.find(params[:id])
-    @multiqs = MultiQ.all.where(:survey_id => @survey.id)
-  end
-
   def create
-    @survey = Survey.new(whitelisted_user_params)
+    @survey = Survey.new(whitelisted_survey_params)
     if @survey.save
       flash[:success] = "New Survey initiated"
-      redirect_to new_survey_add_question_path(@survey)
+      redirect_to edit_survey_path(@survey.id)
     else
       flash.now[:danger] = "New Survey could not be initiated."
       render 'new'
@@ -27,15 +25,25 @@ class SurveysController < ApplicationController
 
   def edit
     @survey = Survey.find(params[:id])
-    @multiqs = MultiQ.all.where(:survey_id => @survey.id)
+    @choice_type ||= params[:choice_type]
+    @mutiq = MultiQ.new
   end
 
   def update
-
+    if params[:choice_type] == "Multiple Choice"
+      flash.now[:success] = "Initiated Multiple Choice Question"
+      redirect_to new_survey_add_question_path(params[:id])
+    elsif params[:choice_type] == "Number Range"
+      flash.now[:success] = "Initiated Number Range Question, however this option is not ready yet and you are transferred to Multiple Choice Question instead. Sorry."
+      redirect_to new_survey_add_question_path(@survey)
+    else
+      flash[:danger] = "We couldn't create any Question" + @survey.errors.full_messages.join(', ')
+      render 'edit', :locals => {:survey => @survey}
+    end
   end
 
   private
-  def whitelisted_user_params
+  def whitelisted_survey_params
     params.require(:survey).permit(:title, :description)
   end
 

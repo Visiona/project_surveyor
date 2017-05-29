@@ -1,5 +1,4 @@
 
-
 <H1>
   Survey Builder
 </H1>
@@ -34,7 +33,7 @@
 
 <hr class="bold">
 <H3>
-  Add a ultiple Choice of Question:
+  Add a multiple Choice of Question:
 </H3>
 <hr class="bold">
 <ol class="survey-builder">
@@ -48,29 +47,7 @@
 </ol>
 
 <div class = "q-box-wrapper">
-<%= form_for @survey do |survey_fields| %>
-  <%= survey_fields.fields_for :multi_q do |multi_q_field| %>
-    <div class="form-group">
-      <%= label_tag :no_options, "How many options should the question have?", class: "response" %>
-      <%= select_tag :no_options, options_for_select([1,2,3,4,5], "1"), :class => "form-control" %>
 
-      <%= label_tag :choice_no, "How many options can be selected?", class: "response" %>
-        <%= radio_button_tag(:choice_no, "one") %>
-        <%= label_tag(:choice_no_one, "Just One") %>
-        <%= radio_button_tag(:choice_no, "adult") %>
-        <%= label_tag(:choice_no_multi, "multi") %>
-
-      <%= label_tag :choice_req, "Is the question required", class: "response" %>
-        <%= radio_button_tag(:choice_req, "one") %>
-        <%= label_tag(:choice_req_yes, "Yes") %>
-        <%= radio_button_tag(:choice_req, "adult") %>
-        <%= label_tag(:choice_req_no, "No") %>
-
-    </div>
-    <div class="big-button-wrapper">
-      <%= submit_tag "Add a New Question", class: "btn btn-primary btn-group btn-group-lg" %>
-    </div>
-  <% end %>
 </div>
 
 <hr class="bold">

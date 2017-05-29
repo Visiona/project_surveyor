@@ -1,5 +1,3 @@
-<!-- 
-
 <H1>
   Survey Builder
 </H1>
@@ -33,39 +31,18 @@
 </div>
 
 <hr class="bold">
-<H3>
-  Add a ultiple Choice of Question:
-</H3>
-<hr class="bold">
-<ol class="survey-builder">
-  <li class="">
-    <span>Select Options</span>
-  </li>
-    <span class="bar">|</span>
-  <li class="">
-    <span class="page-inactive">Add Question Text</span>
-  </li>
-</ol>
-
 <div class = "q-box-wrapper">
-<%= form_for @survey do |survey_fields| %>
-  <%= survey_fields.fields_for :multi_q do |multi_q_field| %>
+  <label class="big-fields-labels">
+    Add a Question:
+  </label>
+  <p class="response">
+    Choose which type of question to add.
+  </p>
+
+  <%= form_tag("/surveys/#{@survey.id}", method: "patch") do  %>
     <div class="form-group">
-      <%= label_tag :no_options, "How many options should the question have?", class: "response" %>
-      <%= select_tag :no_options, options_for_select([1,2,3,4,5], "1"), :class => "form-control" %>
-
-      <%= label_tag :choice_no, "How many options can be selected?", class: "response" %>
-        <%= radio_button_tag(:choice_no, "one") %>
-        <%= label_tag(:choice_no_one, "Just One") %>
-        <%= radio_button_tag(:choice_no, "adult") %>
-        <%= label_tag(:choice_no_multi, "multi") %>
-
-      <%= label_tag :choice_req, "Is the question required", class: "response" %>
-        <%= radio_button_tag(:choice_req, "one") %>
-        <%= label_tag(:choice_req_yes, "Yes") %>
-        <%= radio_button_tag(:choice_req, "adult") %>
-        <%= label_tag(:choice_req_no, "No") %>
-
+      <%= select_tag "choice_type", options_for_select([["Multiple Choice"] ,["Number Range"]], "Multiple Choice"), :class => "form-control" %>
+      <%= hidden_field_tag :id, :value => @survey.id %>
     </div>
     <div class="big-button-wrapper">
       <%= submit_tag "Add a New Question", class: "btn btn-primary btn-group btn-group-lg" %>
@@ -89,5 +66,3 @@
     There are no questions yet!
   <% end %>
 </div>
-
- -->
