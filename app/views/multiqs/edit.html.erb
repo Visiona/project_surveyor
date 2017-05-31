@@ -35,9 +35,8 @@
 <H3>
   Add a multiple Choice of Question:
 </H3>
-<hr class="bold">
 <ol class="survey-builder">
-  <li class="">
+  <li class="inactive">
     <span>Select Options</span>
   </li>
     <span class="bar">|</span>
@@ -45,19 +44,38 @@
     <span class="page-inactive">Add Question Text</span>
   </li>
 </ol>
+<p>
+  Next, add the text for each of your options.
+</p>
 
 <div class = "q-box-wrapper">
-
+  <%= form_for( @multiq, :url => { :controller => "multiqs", :action => "update" }, html: { :class => "" } ) do |question_fields| %>
+    <div class="form-group">
+      <%= question_fields.label :question, "What is your question:", class: "big-fields-labels" %>
+      <%= question_fields.text_field :question, class: "form-control", :placeholder => "eg. 'Who does number two work for?' " %>
+    </div>
+    <%= question_fields.fields_for :choices do |choose_answer| %>
+      <div class="form-group">
+        <% @choices.each do |ch| %>
+        <%= choose_answer.label :name, "Option #{1}", class: "big-fields-labels" %>
+        <%= choose_answer.text_field :name, class: "form-control", :placeholder => "eg. 'Dr Evil' " %>
+        <% end %>
+      </div>
+    <% end %>
+    <div class="big-button-wrapper">
+      <%= question_fields.submit "Add Question", class: "btn btn-primary btn-group btn-group-lg" %>
+    </div>
+  <% end %>
 </div>
-
+<%= link_to "Back to previous step", "#" %>
 <hr class="bold">
 
 <div class="q-box-wrapper">
   <p class="big-fields-labels">
     Existing Questions:
   </p>
-  <% if @multiq.present? %>
-    <% @multiq.each do |m| %>
+  <% if @multiqs.present? %>
+    <% @multiqs.each do |m| %>
       <%= m.id %>
       <%= m.survey_id %>
       <%= m.question %>

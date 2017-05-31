@@ -47,7 +47,7 @@
 </ol>
 
 <div class = "q-box-wrapper">
-  <%= form_for(@multiq, :url => new_survey_add_question_path) do |f| %>
+  <%= form_for(@multiq, :url => { :controller => "multiqs", :action => "create" }) do |f| %>
     <div class="form-group">
       <p class="response">How many options should the question have?</p>
       <%= select_tag :no_options, options_for_select([1,2,3,4,5,6,7]), :class => "form-control" %>
@@ -57,6 +57,8 @@
         <%= label :multiple, "Just One" %><br>
         <%= f.radio_button(:multiple, true) %>
         <%= label :multiple, "Multiple" %>
+        <%= f.hidden_field :survey_id, :value => @survey.id %>
+        <%= f.hidden_field :question, :value => "" %>
 
       <p class="response">Is the question required?</p>
       <%= f.radio_button(:required, true) %>

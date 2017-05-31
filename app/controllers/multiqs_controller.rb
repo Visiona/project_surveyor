@@ -5,15 +5,16 @@ class MultiqsController < ApplicationController
 
   def new
     @survey = Survey.all.where(:id => params['survey_id'])[0]
-    @multiq = MultiQ.new(:survey_id => @survey.id)
+    @multiq = MultiQ.new
     @multiqs = MultiQ.all.where(:survey_id => @survey.id)
   end
 
   def create
     @multiq = MultiQ.new(whitelisted_multiq_params)
+    @survey = Survey.find(params[:survey_id])
     n = params[:no_options].to_i
-    n.times { @multiq.choices.build(:name => nil)}
     if @multiq.save
+      n.times { @multiq.choices.create(:name => "")}
       flash[:success] = "New Question initiated"
       redirect_to edit_survey_add_question_path(@survey, @multiq)
     else
@@ -23,21 +24,31 @@ class MultiqsController < ApplicationController
   end
 
   def edit
-    @survey = Survey.find(params[:id])
-    @multiqs = MultiQ.all.where(:survey_id => @survey.id)[0]
-    @multiq = MultiQ.new(:survey_id => @survey.id)
-    @choices = Choice.all.where(:multiq => @multiq.id)
+    @survey = Survey.find(params[:survey_id])
+    @multiqs = MultiQ.all.where(:survey_id => params[:survey_id])
+    @multiq = MultiQ.find(params[:id])
+    @choices = Choice.all.where(:multi_q_id => @multiq.id)
   end
 
   def update
-
+    @survey = Survey.find(params[:survey_id])
+    @multiqs = MultiQ.all.where(:survey_id => params[:survey_id])
+    @multiq = MultiQ.find(params[:id])
+    @choices = Choice.all.where(:multi_q_id => @multiq.id)
+    if @multiq.update(whitelisted_multiq_params)
+      flash[:success] = "Updated your account!"
+      redirect_to @multiq
+    else
+      flash.now[:error] = "Failed to update your account!"
+      render :edit
+    end
   end
 
 
 
   private
   def whitelisted_multiq_params
-    params.require(:multiq).permit(:survey_id, :question, :required, :multiple)
+    params.require(:multi_q).permit(:survey_id, :question, :required, :multiple)
   end
 
 
