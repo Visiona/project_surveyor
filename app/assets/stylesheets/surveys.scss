@@ -50,6 +50,9 @@ ol.survey-builder {
   list-style-type: decimal;
   li {
       display: inline;
+      span.inactive {
+        color: #bbb;
+      }
   }
 }
 

@@ -8,7 +8,7 @@
   </li>
     <span class="bar">|</span>
   <li class="">
-    <span class="page-inactive">Add Questions</span>
+    <span class="inactive">Add Questions</span>
   </li>
 </ol>
 <p>
@@ -56,13 +56,18 @@
   <p class="big-fields-labels">
     Existing Questions:
   </p>
-  <% if @multiq.present? %>
-    <% @multiq.each do |m| %>
-      <%= m.id %>
-      <%= m.survey_id %>
-      <%= m.question %>
+  <% if @survey.multi_qs.present? %>
+    <% @survey.multi_qs.each_with_index do |q, qidx| %>
+      <%= qidx + 1 %><%= q.question %>
+      <% q.choices.each_with_index do |answer, aidx| %>
+        <%= aidx + 1 %> <%= answer.name  %>
+      <% end %>
+      <%= link_to "Remove Question", "/surveys/#{q.survey_id}/add_questions/#{q.id}", 
+                              :method => "DELETE", 
+                              data: {confirm: "Are you sure?"} %>
     <% end %>
   <% else %>
     There are no questions yet!
   <% end %>
 </div>
+<hr class="bold">

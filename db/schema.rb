@@ -14,7 +14,7 @@ ActiveRecord::Schema.define(version: 20170524223639) do
 
   create_table "choices", force: :cascade do |t|
     t.integer  "multi_q_id", null: false
-    t.string   "name",       null: false
+    t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_choices_on_name"

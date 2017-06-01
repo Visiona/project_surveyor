@@ -36,12 +36,12 @@
   Add a multiple Choice of Question:
 </H3>
 <ol class="survey-builder">
-  <li class="inactive">
-    <span>Select Options</span>
+  <li>
+    <span class="inactive">Select Options</span>
   </li>
     <span class="bar">|</span>
-  <li class="">
-    <span class="page-inactive">Add Question Text</span>
+  <li>
+    <span>Add Question Text</span>
   </li>
 </ol>
 <p>
@@ -56,10 +56,8 @@
     </div>
     <%= question_fields.fields_for :choices do |choose_answer| %>
       <div class="form-group">
-        <% @choices.each do |ch| %>
-        <%= choose_answer.label :name, "Option #{1}", class: "big-fields-labels" %>
+        <%= choose_answer.label :name, "Option #{1 + choose_answer.index}:", class: "big-fields-labels" %>
         <%= choose_answer.text_field :name, class: "form-control", :placeholder => "eg. 'Dr Evil' " %>
-        <% end %>
       </div>
     <% end %>
     <div class="big-button-wrapper">
@@ -75,13 +73,16 @@
     Existing Questions:
   </p>
   <% if @multiqs.present? %>
-    <% @multiqs.each do |m| %>
-      <%= m.id %>
-      <%= m.survey_id %>
-      <%= m.question %>
+    <% @multiqs.each_with_index do |q, qidx| %>
+      <%= qidx + 1 %><%= q.question %>
+      <% q.choices.each_with_index do |answer, aidx| %>
+        <%= idx + 1 %> <%= answer.name  %>
+      <% end %>
+      <%= link_to "Remove Question", q, method: "DELETE", data: {confirm: "Are you sure?"} %>
     <% end %>
   <% else %>
     There are no questions yet!
   <% end %>
 </div>
+<hr class="bold">
 
