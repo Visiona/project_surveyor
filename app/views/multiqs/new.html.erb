@@ -1,63 +1,24 @@
-
-<H1>
-  Survey Builder
-</H1>
-<hr class="bold">
-<ol class="survey-builder">
-  <li>
-    <span class="inactive">Build Survey</span>
-  </li>
-    <span class="bar">|</span>
-  <li class="">
-    <span>Add Questions</span>
-  </li>
-</ol>
-<p>
-  Next, fill in the questions.
-</p>
-<div class="q-box-wrapper">
-  <label class="big-fields-labels">
-    Title:
-  </label>
-  <p>
-    <%= @survey.title %>
-  </p>
-
-  <label class="big-fields-labels">
-    Description:
-  </label>
-  <p>
-    <%= @survey.description %>
-  </p>
-</div>
+<%= render "shared/survey_top_panel"  %>
 
 <hr class="bold">
-<H3>
-  Add a multiple Choice of Question:
-</H3>
-<ol class="survey-builder">
-  <li class="">
-    <span>Select Options</span>
-  </li>
-    <span class="bar">|</span>
-  <li class="">
-    <span class="inactive">Add Question Text</span>
-  </li>
-</ol>
+
+<%= render partial: "question_top_panel", locals: {select: "active", add: "inactive"} %>
+
+
 
 <div class = "q-box-wrapper">
   <%= form_for(@multiq, :url => { :controller => "multiqs", :action => "create" }) do |f| %>
     <div class="form-group">
       <p class="response">How many options should the question have?</p>
-      <%= select_tag :no_options, options_for_select([1,2,3,4,5,6,7]), :class => "form-control" %>
+      <%= select_tag :no_options, options_for_select([1,2,3,4,5,6,7]), :class => "form-control" %><br>
 
       <p class="response">How many options can be selected?</p>
         <%= f.radio_button(:multiple, false) %>
         <%= label :multiple, "Just One" %><br>
-        <%= f.radio_button(:multiple, true) %>
+        <%= f.radio_button(:multiple, true, checked: true) %>
         <%= label :multiple, "Multiple" %>
         <%= f.hidden_field :survey_id, :value => @survey.id %>
-        <%= f.hidden_field :question, :value => "" %>
+        <%= f.hidden_field :question, :value => "" %><br><br>
 
       <p class="response">Is the question required?</p>
       <%= f.radio_button(:required, true) %>
@@ -74,18 +35,4 @@
 
 <hr class="bold">
 
-<div class="q-box-wrapper">
-  <p class="big-fields-labels">
-    Existing Questions:
-  </p>
-  <% if @multiq.present? && @multiq.id != nil %>
-    <% @multiq.each do |m| %>
-      <%= m.id %>
-      <%= m.survey_id %>
-      <%= m.question %>
-    <% end %>
-  <% else %>
-    There are no questions yet!
-  <% end %>
-</div>
-
+<%= render "shared/existing_questions"  %>

@@ -1,0 +1,21 @@
+
+<div class="q-box-wrapper">
+  <p class="big-fields-labels">
+    Existing Questions:
+  </p>
+  <% if @multiqs.present? %>
+    <ol class="questions"><% @multiqs.each do |q| %>
+      <li><%= q.question.empty? ? "in progress ..." : q.question %></li>
+      <p class="response">
+        <%= q.required ? "Required. " : "Not required. " %>
+        <%= q.multiple ? "Select Many." : "Select One" %>
+      </p>
+      <ol class="choices"><% q.choices.each do |answer| %>
+        <li><%= answer.name  %></li>
+      <% end %></ol>
+      <%= link_to "Remove Question", "/surveys/#{q.survey_id}/add_questions/#{q.id}", method: "DELETE", data: {confirm: "Are you sure?"} %>
+    <% end %></ol><br>
+  <% else %>
+    There are no questions yet!
+  <% end %>
+</div>

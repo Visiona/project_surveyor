@@ -5,9 +5,6 @@ class SurveysController < ApplicationController
     @surveys = Survey.all
   end
 
-  def show
-  end
-
   def new
     @survey = Survey.new
   end
@@ -26,6 +23,7 @@ class SurveysController < ApplicationController
   def edit
     @survey = Survey.find(params[:id])
     @choice_type ||= params[:choice_type]
+    @multiqs = @survey.multi_qs.includes(:choices)
     @mutiq = MultiQ.new
   end
 

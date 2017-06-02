@@ -9,7 +9,7 @@ INDEX
 
 
 
-h1 {
+h1, h3 {
   text-align: center;
 }
 
@@ -47,12 +47,11 @@ span.bar {
 
 ol.survey-builder {
   text-align: center;
-  list-style-type: decimal;
   li {
-      display: inline;
-      span.inactive {
-        color: #bbb;
-      }
+    display: inline;
+  }
+  li.inactive {
+    color: #bbb;
   }
 }
 
@@ -64,3 +63,11 @@ hr.bold {
   border: 1px solid #888;
 }
 
+ol.questions li {
+  font-size: 17px;
+}
+
+ol.choices li {
+  list-style-type: lower-alpha;
+  font-weight: 100;
+}

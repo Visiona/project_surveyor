@@ -1,34 +1,4 @@
-<H1>
-  Survey Builder
-</H1>
-<hr class="bold">
-<ol class="survey-builder">
-  <li class="">
-    <span>Build Survey</span>
-  </li>
-    <span class="bar">|</span>
-  <li class="">
-    <span class="inactive">Add Questions</span>
-  </li>
-</ol>
-<p>
-  Next, fill in the questions.
-</p>
-<div class="q-box-wrapper">
-  <label class="big-fields-labels">
-    Title:
-  </label>
-  <p>
-    <%= @survey.title %>
-  </p>
-
-  <label class="big-fields-labels">
-    Description:
-  </label>
-  <p>
-    <%= @survey.description %>
-  </p>
-</div>
+<%= render "shared/survey_top_panel"  %>
 
 <hr class="bold">
 <div class = "q-box-wrapper">
@@ -52,22 +22,12 @@
 
 <hr class="bold">
 
-<div class="q-box-wrapper">
-  <p class="big-fields-labels">
-    Existing Questions:
-  </p>
-  <% if @survey.multi_qs.present? %>
-    <% @survey.multi_qs.each_with_index do |q, qidx| %>
-      <%= qidx + 1 %><%= q.question %>
-      <% q.choices.each_with_index do |answer, aidx| %>
-        <%= aidx + 1 %> <%= answer.name  %>
-      <% end %>
-      <%= link_to "Remove Question", "/surveys/#{q.survey_id}/add_questions/#{q.id}", 
-                              :method => "DELETE", 
-                              data: {confirm: "Are you sure?"} %>
-    <% end %>
-  <% else %>
-    There are no questions yet!
-  <% end %>
-</div>
+<%= render "shared/existing_questions"  %>
+
 <hr class="bold">
+
+<% if @survey.multi_qs.present?  %>
+  <div class="big-button-wrapper">
+    <%= link_to "Finish Building Survey and Return", root_path, class: "btn btn-primary btn-group btn-group-lg" %>
+  </div>
+<% end %>
