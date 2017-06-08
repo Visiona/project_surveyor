@@ -1,0 +1,29 @@
+
+<H1>
+  Survey Taker:
+</H1>
+<hr class="bold">
+<H5>
+<%= @survey.title %>
+</H5>
+<p>
+  <%= @survey.description %>
+</p>
+<br>
+<p class="inactive">
+  Questions marked with an asterisk (*) are required
+</p>
+
+<% form_for @multi_answers do |f| %>
+  <ol><% @survey.multi_qs.each do |q| %>
+    <li><%= q.question  %></li>
+    <% q.choices.each do |choice| %>
+    <% if q.multiple %>
+      <% f.checkboxes %>
+        <%= choice.name  %>
+    <% else %>
+      <% f.radio_buttons %>
+    <% end %>
+  <% end %>
+<% end %></ol>
+

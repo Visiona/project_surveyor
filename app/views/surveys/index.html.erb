@@ -25,7 +25,7 @@
 
       <p><%= sur.description %></p>
       <p class="response"> <%= sur.users.count %>  Responses</p>
-      <%= link_to "Take Survey", "", class: "btn btn-outline-secondary" %>
+      <%= link_to "Take Survey", new_survey_multi_answer_path(sur.id), class: "btn btn-outline-secondary" %>
       <%= link_to "View Results", "",class: "btn btn-outline-secondary" %>
     </div>
   <% end %>
