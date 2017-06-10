@@ -1,4 +1,4 @@
-
+<!-- 
 <H1>
   Survey Taker:
 </H1>
@@ -14,16 +14,17 @@
   Questions marked with an asterisk (*) are required
 </p>
 
-<% form_for @multi_answers do |f| %>
-  <ol><% @survey.multi_qs.each do |q| %>
-    <li><%= q.question  %></li>
-    <% q.choices.each do |choice| %>
-    <% if q.multiple %>
-      <% f.checkboxes %>
-        <%= choice.name  %>
-    <% else %>
-      <% f.radio_buttons %>
+<% form_for @user do |user| %>
+  <ol><% user.fields_for @multi_answers do |answer| %>
+    <li><%= answer.object.multi_q.question %></li>
+    <% if answer.object.multi_q.multiple %>
+      <%= answer.collection_check_boxes(:choice_id, Choice.where(:multi_q_id => answer.object.multi_q.id), :id, :name) %>
+      <% else %>
+        <%= answer.collection_radio_buttons(:choice_id, Choice.where(:multi_q_id => answer.object.multi_q.id), :id, :name) %>
     <% end %>
+    <%= answer.hidden_field :multi_q_id, :value => answer.object.multi_q.id  %>
   <% end %>
+  <%= user.submit "Submit Your Survey", class: "btn btn-primary btn-group btn-group-lg" %>
 <% end %></ol>
 
+ -->

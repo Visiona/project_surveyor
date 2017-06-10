@@ -8,7 +8,7 @@
 </H1>
 <br>
 <p>
-  Click on a survey below totake it or create one of your own!
+  Click on a survey below to take it or create one of your own!
 </p>
 
 <div class="big-button-wrapper">
@@ -25,7 +25,7 @@
 
       <p><%= sur.description %></p>
       <p class="response"> <%= sur.users.count %>  Responses</p>
-      <%= link_to "Take Survey", new_survey_multi_answer_path(sur.id), class: "btn btn-outline-secondary" %>
+      <%= link_to "Take Survey", new_survey_user_path(sur.id), class: "btn btn-outline-secondary" %>
       <%= link_to "View Results", "",class: "btn btn-outline-secondary" %>
     </div>
   <% end %>

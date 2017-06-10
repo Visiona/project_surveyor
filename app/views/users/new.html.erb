@@ -1,0 +1,34 @@
+
+<H1>
+  Survey Taker:
+</H1>
+<hr class="bold">
+<H5>
+<%= @survey.title %>
+</H5>
+<p>
+  <%= @survey.description %>
+</p>
+<br>
+<p class="inactive">
+  Questions marked with an asterisk (*) are required
+</p>
+
+<%= form_for [@survey, @user] do |user| %>
+  <ol><%= user.fields_for :multi_answers do |answer| %>
+    <li><%= answer.object.multi_q.question %></li>
+    <%= render "error_messages", :target => @user %>
+    <% if answer.object.multi_q.multiple %>
+      <div class="checkbox">
+      <%= answer.collection_check_boxes(:choice_id, Choice.where(:multi_q_id => answer.object.multi_q.id), :id, :name, {}, {:class => "form-control"}) %>
+      </div>
+    <% else %>
+    <div class="radio">
+      <%= answer.collection_radio_buttons(:choice_id, Choice.where(:multi_q_id => answer.object.multi_q.id), :id, :name, {}, {:class => "form-control"}) %>
+    </div>
+    <% end %>
+    <%= answer.hidden_field :multi_q_id, :value => answer.object.multi_q.id  %>
+  <% end %>
+  <%= user.submit "Submit Your Survey", class: "btn btn-primary btn-group btn-group-lg" %>
+<% end %></ol>
+
