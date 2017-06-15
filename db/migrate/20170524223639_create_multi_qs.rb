@@ -4,10 +4,10 @@ class CreateMultiQs < ActiveRecord::Migration[5.0]
       t.string :question, :null => false
       t.integer :survey_id, :null => false
       t.boolean :required, :default => false
-      t.boolean :multiple, :defaulr => true
+      t.boolean :multiple, :default => true
 
       t.timestamps
     end
-    add_index :multi_qs, [:question, :survey_id]
+    add_index :multi_qs, [:question, :survey_id], :unique => true
   end
 end

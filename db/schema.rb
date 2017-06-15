@@ -26,17 +26,17 @@ ActiveRecord::Schema.define(version: 20170524223639) do
     t.integer  "multi_q_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id", "choice_id"], name: "index_multi_answers_on_user_id_and_choice_id", unique: true
+    t.index ["user_id", "choice_id", "multi_q_id"], name: "index_multi_answers_on_user_id_and_choice_id_and_multi_q_id", unique: true
   end
 
   create_table "multi_qs", force: :cascade do |t|
     t.string   "question",                   null: false
     t.integer  "survey_id",                  null: false
     t.boolean  "required",   default: false
-    t.boolean  "multiple"
+    t.boolean  "multiple",   default: true
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
-    t.index ["question", "survey_id"], name: "index_multi_qs_on_question_and_survey_id"
+    t.index ["question", "survey_id"], name: "index_multi_qs_on_question_and_survey_id", unique: true
   end
 
   create_table "range_answers", force: :cascade do |t|

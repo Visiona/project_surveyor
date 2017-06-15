@@ -1,0 +1,42 @@
+
+<H1>
+  Survey Results:
+</H1>
+<hr class="bold">
+<H5>
+<%= @survey.title %>
+</H5>
+<p>
+  <%= @survey.description %>
+</p>
+<br>
+<p class="response">
+  <%= @survey.users.count %> Responses
+</p>
+<ol>
+<% @survey.multi_qs.each do |q| %>
+
+    <li>
+      <%= q.question %>
+    </li>
+    <div class="table-wrapper table-responsive">
+      <table class="table table-striped">
+        <caption></caption>
+        <thead>
+          <tr>
+            <th>Response</th>
+            <th>Count</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% q.choices.each do |ch| %>
+            <tr>
+              <td><%= ch.name %></td>
+              <td><%= ch.multi_answers.count %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+<% end %>
+</ol>

@@ -6,5 +6,6 @@ class CreateSurveys < ActiveRecord::Migration[5.0]
 
       t.timestamps
     end
+
   end
 end

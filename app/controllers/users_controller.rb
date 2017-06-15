@@ -11,8 +11,8 @@ class UsersController < ApplicationController
   def create
     @survey = Survey.find(params[:survey_id])
     @user = User.new(whitelisted_answers_params)
+
     if @user.save
-      # @multi_answers.where(:choice_id => nil).destroy_all
       flash[:success] = "Thank you for submitting your survey."
       redirect_to root_path
     else

@@ -5,6 +5,11 @@ class SurveysController < ApplicationController
     @surveys = Survey.all
   end
 
+  def show
+    @survey = Survey.includes(multi_qs: :choices).find(params[:id])
+    # !!!! REMEMBER IT!!!!!!
+  end
+
   def new
     @survey = Survey.new
   end
