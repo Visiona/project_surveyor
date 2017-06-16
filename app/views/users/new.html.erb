@@ -17,15 +17,19 @@
 <%= form_for([@survey, @user]) do |user| %>
   <ol><%= user.fields_for :multi_answers do |answer| %>
     <li><%= answer.object.multi_q.question %></li>
-    <%=  answer.object.multi_q.required %>
-    <%= render "error_messages", :target => @user %>
+    <%= "Required" if answer.object.multi_q.required %>
+    <br><br>
     <% if answer.object.multi_q.multiple %>
+    <%= answer.object.multi_q.errors %>
+        <%= render "error_messages", :target => answer.object.multi_q %>
+
       <div class="checkbox">
-      <%= answer.collection_check_boxes(:choice_id, Choice.where(:multi_q_id => answer.object.multi_q.id), :id, :name, {}, {:class => "form-control", :checked => 'checked' }) %>
+      <%= answer.collection_check_boxes(:choice_id, Choice.where(:multi_q_id => answer.object.multi_q.id), :id, :name, {include_hidden: false}, {:class => "form-control", :checked => 'checked' }) %>
       </div>
+      <%= answer.hidden_field :multi_q_id, :value => answer.object.multi_q.id  %>
     <% else %>
     <div class="radio">
-      <%= answer.collection_radio_buttons(:choice_id, Choice.where(:multi_q_id => answer.object.multi_q.id), :id, :name, {}, {:class => "form-control", :checked => 'checked'}) %>
+      <%= answer.collection_radio_buttons(:choice_id, Choice.where(:multi_q_id => answer.object.multi_q.id), :id, :name, {include_hidden: false}, {:class => "form-control", :checked => 'checked'}) %>
     </div>
       <%= answer.hidden_field :multi_q_id, :value => answer.object.multi_q.id  %>
     <% end %>
