@@ -3,9 +3,12 @@ class UsersController < ApplicationController
   def new
     @survey = Survey.find(params[:survey_id])
     @user = User.new
-    @survey.multi_qs.each do |q|
-      @user.multi_answers.build(:multi_q => q)
+    if params[:user].nil?
+      @survey.multi_qs.each do |q|
+        @user.multi_answers.build(:multi_q => q)
+      end
     end
+    # binding.pry
   end
 
   def create
@@ -15,10 +18,10 @@ class UsersController < ApplicationController
     n.times do |i|
       choices = params[:user][:multi_answers_attributes]["#{i}"][:choice_id]
       param_multi_q_id = params[:user][:multi_answers_attributes]["#{i}"][:multi_q_id]
-      if choices.nil? && @survey.multi_qs.where(:id => param_multi_q_id.to_i)[0].required
-        @survey.multi_qs.where(:id => param_multi_q_id.to_i)[0].errors.add(:choice_id, "This Question is required")
-      end
-      if choices.is_a?(Array) || choices.nil?
+      # if choices.nil? && @survey.multi_qs.where(:id => param_multi_q_id.to_i)[0].required
+      #   @survey.multi_qs.where(:id => param_multi_q_id.to_i)[0].errors.add(:choice_id, "This Question is required")
+      # end
+      if choices.is_a?(Array) # || choices.nil?
         for_deletion = []
         @user.multi_answers.each do |ma|
           if ma.multi_q_id == param_multi_q_id.to_i
@@ -37,7 +40,8 @@ class UsersController < ApplicationController
       redirect_to root_path
     else
       flash.now[:danger] = "The fields were incorrectly filled out."
-      render 'new'
+      render :new
+      # binding.pry
     end
   end
 

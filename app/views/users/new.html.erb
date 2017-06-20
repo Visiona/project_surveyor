@@ -14,21 +14,24 @@
   Questions marked with an asterisk (*) are required
 </p>
 
-<%= form_for([@survey, @user]) do |user| %>
+<%= form_for([@survey, @user], html: { :class => "form-horizontal" }) do |user| %>
+  <% q = [] %>
   <ol><%= user.fields_for :multi_answers do |answer| %>
-    <li><%= answer.object.multi_q.question %></li>
-    <%= "Required" if answer.object.multi_q.required %>
+    <% unless q.include? answer.object.multi_q_id %>
+      <li><%= answer.object.multi_q.question %></li>
+      <%= "Required" if answer.object.multi_q.required %>
+      <% q << answer.object.multi_q_id %>
+    <% end %>
     <br><br>
     <% if answer.object.multi_q.multiple %>
-    <%= answer.object.multi_q.errors %>
-        <%= render "error_messages", :target => answer.object.multi_q %>
+      <%= render "error_messages", :target => answer.object %>
 
-      <div class="checkbox">
+      <div class="form-check">
       <%= answer.collection_check_boxes(:choice_id, Choice.where(:multi_q_id => answer.object.multi_q.id), :id, :name, {include_hidden: false}, {:class => "form-control", :checked => 'checked' }) %>
       </div>
       <%= answer.hidden_field :multi_q_id, :value => answer.object.multi_q.id  %>
     <% else %>
-    <div class="radio">
+    <div class="form-check">
       <%= answer.collection_radio_buttons(:choice_id, Choice.where(:multi_q_id => answer.object.multi_q.id), :id, :name, {include_hidden: false}, {:class => "form-control", :checked => 'checked'}) %>
     </div>
       <%= answer.hidden_field :multi_q_id, :value => answer.object.multi_q.id  %>
@@ -37,4 +40,3 @@
   <% end %>
   <%= user.submit "Submit Your Survey", class: "btn btn-primary btn-group btn-group-lg" %>
 <% end %></ol>
-

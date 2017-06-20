@@ -1,0 +1,43 @@
+
+
+<H1>
+  Survey Taker:
+</H1>
+<hr class="bold">
+<H5>
+<%= @survey.title %>
+</H5>
+<p>
+  <%= @survey.description %>
+</p>
+<br>
+<p class="inactive">
+  Questions marked with an asterisk (*) are required
+</p>
+
+<%= form_for([@survey, @user], html: { :class => "form-horizontal" }) do |user| %>
+  <% if @survey.has_questions? %>
+    <% @survey.all_multi_qs_with_question.each do |multi_question| %>
+      <%= multi_question.question %>
+        <%= user.fields_for :multi_answers do |multi_answer| %>
+          <%= multi_answer.hidden_field :multi_q_id, value: multi_question.id %>
+          <% if multi_question.multiple? %>
+            <%= "Required" if multi_question.required %>
+            <div class="form-check">
+            <%= render "error_messages", :target => multi_answer.object %>
+            <%= multi_answer.collection_check_boxes(:choice_id, Choice.where(:multi_q_id => multi_question.id), :id, :name, {include_hidden: false}, {:class => "form-control", :checked => 'checked' }) %>
+            </div>
+          <% else %>
+            <div class="form-check">
+              <%= multi_answer.collection_radio_buttons(:choice_id, Choice.where(:multi_q_id => multi_question.id), :id, :name, {include_hidden: false}, {:class => "form-control", :checked => 'checked' }) %>
+            </div>
+          <% end %>
+        <% end %>
+
+    <% end %>
+  <% end %>
+  <%= user.submit "Submit Your Survey", class: "btn btn-primary btn-group btn-group-lg" %>
+<% end %></ol>
+
+
+
