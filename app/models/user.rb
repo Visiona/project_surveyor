@@ -9,21 +9,21 @@ class User < ApplicationRecord
                                 :reject_if => :all_blank, 
                                 :allow_destroy => :true
 
- #  validate :required_question_was_answered
+  validate :required_question_was_answered
 
- #  def required_question_was_answered
- #    multi_qs.each do |q| 
- #      if q.required 
- #        if find_relevant_answers(q).any?
- #          errors.add(:choice_id, "This Question is required")
- #        end
- #      end
- #    end
- #  end
+  def required_question_was_answered
+    multi_qs.each do |q| 
+      if q.required 
+        if find_relevant_answers(q).any?
+          errors.add(:choice_id, "This Question is required")
+        end
+      end
+    end
+  end
  
- # def find_relevant_answers(question)
- #  multi_answers.where(:multi_q_id => question.id)
- # end
+ def find_relevant_answers(question)
+  multi_answers.where(:multi_q_id => question.id)
+ end
 
  # def all_required_answered_in_params(param)
    

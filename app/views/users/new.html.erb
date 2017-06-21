@@ -27,12 +27,12 @@
       <%= render "error_messages", :target => answer.object %>
 
       <div class="form-check">
-      <%= answer.collection_check_boxes(:choice_id, Choice.where(:multi_q_id => answer.object.multi_q.id), :id, :name, {include_hidden: false}, {:class => "form-control", :checked => 'checked' }) %>
+      <%= answer.collection_check_boxes(:choice_id, Choice.where(:multi_q_id => answer.object.multi_q.id), :id, :name, {include_hidden: false}, {:class => "form-control"}) %>
       </div>
       <%= answer.hidden_field :multi_q_id, :value => answer.object.multi_q.id  %>
     <% else %>
     <div class="form-check">
-      <%= answer.collection_radio_buttons(:choice_id, Choice.where(:multi_q_id => answer.object.multi_q.id), :id, :name, {include_hidden: false}, {:class => "form-control", :checked => 'checked'}) %>
+      <%= answer.collection_radio_buttons(:choice_id, Choice.where(:multi_q_id => answer.object.multi_q.id), :id, :name, {include_hidden: false}, {:class => "form-control"}) %>
     </div>
       <%= answer.hidden_field :multi_q_id, :value => answer.object.multi_q.id  %>
     <% end %>

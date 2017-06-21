@@ -14,13 +14,11 @@ class UsersController < ApplicationController
   def create
     @survey = Survey.find(params[:survey_id])
     @user = User.new(whitelisted_answers_params)
-    n = params[:user][:multi_answers_attributes].size
+    n = params[:user][:multi_answers_attributes].to_hash.size
     n.times do |i|
-      choices = params[:user][:multi_answers_attributes]["#{i}"][:choice_id]
-      param_multi_q_id = params[:user][:multi_answers_attributes]["#{i}"][:multi_q_id]
-      # if choices.nil? && @survey.multi_qs.where(:id => param_multi_q_id.to_i)[0].required
-      #   @survey.multi_qs.where(:id => param_multi_q_id.to_i)[0].errors.add(:choice_id, "This Question is required")
-      # end
+      ma_attrs = params[:user][:multi_answers_attributes][i.to_s]
+      choices = ma_attrs[:choice_id]
+      param_multi_q_id = ma_attrs[:multi_q_id]
       if choices.is_a?(Array) # || choices.nil?
         for_deletion = []
         @user.multi_answers.each do |ma|
@@ -29,9 +27,9 @@ class UsersController < ApplicationController
           end
         end
         for_deletion.each {|ma| ma.destroy}
-        if choices.is_a? Array 
-          choices.each {|ch| @user.multi_answers.build(:multi_q_id => param_multi_q_id.to_i, :choice_id => ch) }
-        end
+        # choices.each {|ch| @user.multi_answers.build(:multi_q_id => param_multi_q_id.to_i, :choice_id => ch) }
+      else
+        puts "Choices are not an array!"
       end
     end
 
@@ -49,6 +47,7 @@ class UsersController < ApplicationController
     params.require(:user).permit(
         {:multi_answers_attributes => [:id,
                                       :choice_id,
+                                      { :choice_id => [] },
                                       :user_id,
                                       :multi_q_id,
                                       :_destroy ] } )
