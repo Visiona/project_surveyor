@@ -19,7 +19,6 @@
   <ol><%= user.fields_for :multi_answers do |answer| %>
     <% unless q.include? answer.object.multi_q_id %>
       <li><%= answer.object.multi_q.question %></li>
-      <%= "Required" if answer.object.multi_q.required %>
       <% q << answer.object.multi_q_id %>
     <% end %>
     <br><br>
