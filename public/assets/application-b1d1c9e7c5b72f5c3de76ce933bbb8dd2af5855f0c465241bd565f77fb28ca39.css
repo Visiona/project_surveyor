@@ -1,0 +1,129 @@
+/*
+========================
+INDEX
+========================*/
+/* line 13, /Users/Visiona/Documents/Viking_School/Ruby/project_surveyor/app/assets/stylesheets/surveys.scss */
+h1, h3 {
+  text-align: center;
+}
+
+/* line 17, /Users/Visiona/Documents/Viking_School/Ruby/project_surveyor/app/assets/stylesheets/surveys.scss */
+h4 {
+  padding: 10px 3px;
+  text-decoration: underline;
+}
+
+/* line 22, /Users/Visiona/Documents/Viking_School/Ruby/project_surveyor/app/assets/stylesheets/surveys.scss */
+div.big-button-wrapper {
+  text-align: center;
+}
+
+/* line 26, /Users/Visiona/Documents/Viking_School/Ruby/project_surveyor/app/assets/stylesheets/surveys.scss */
+ol li {
+  font-weight: 700;
+  font-size: 18px;
+}
+
+/* line 31, /Users/Visiona/Documents/Viking_School/Ruby/project_surveyor/app/assets/stylesheets/surveys.scss */
+div.survey-list-wrapper {
+  margin: 5px 0;
+}
+
+/* line 35, /Users/Visiona/Documents/Viking_School/Ruby/project_surveyor/app/assets/stylesheets/surveys.scss */
+p.response, label.response {
+  font-style: italic;
+}
+
+/* line 39, /Users/Visiona/Documents/Viking_School/Ruby/project_surveyor/app/assets/stylesheets/surveys.scss */
+label.big-fields-labels {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+/* line 44, /Users/Visiona/Documents/Viking_School/Ruby/project_surveyor/app/assets/stylesheets/surveys.scss */
+span.bar {
+  font-size: 20px;
+  color: #444;
+}
+
+/* line 49, /Users/Visiona/Documents/Viking_School/Ruby/project_surveyor/app/assets/stylesheets/surveys.scss */
+ol.survey-builder {
+  text-align: center;
+}
+/* line 51, /Users/Visiona/Documents/Viking_School/Ruby/project_surveyor/app/assets/stylesheets/surveys.scss */
+ol.survey-builder li {
+  display: inline;
+}
+/* line 54, /Users/Visiona/Documents/Viking_School/Ruby/project_surveyor/app/assets/stylesheets/surveys.scss */
+ol.survey-builder li.inactive {
+  color: #bbb;
+}
+
+/* line 59, /Users/Visiona/Documents/Viking_School/Ruby/project_surveyor/app/assets/stylesheets/surveys.scss */
+p.inactive {
+  color: #bbb;
+}
+
+/* line 63, /Users/Visiona/Documents/Viking_School/Ruby/project_surveyor/app/assets/stylesheets/surveys.scss */
+div.q-box-wrapper {
+  padding: 10px 0;
+}
+
+/* line 67, /Users/Visiona/Documents/Viking_School/Ruby/project_surveyor/app/assets/stylesheets/surveys.scss */
+hr.bold {
+  border: 1px solid #888;
+}
+
+/* line 71, /Users/Visiona/Documents/Viking_School/Ruby/project_surveyor/app/assets/stylesheets/surveys.scss */
+ol.questions li {
+  font-size: 17px;
+}
+
+/* line 75, /Users/Visiona/Documents/Viking_School/Ruby/project_surveyor/app/assets/stylesheets/surveys.scss */
+ol.choices li {
+  list-style-type: lower-alpha;
+  font-weight: 100;
+}
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+
+
+ */
+
+
+
+/*
+========================
+LAYOUT
+========================*/
+
+
+div.centralize {
+/*  position: fixed;
+  top: 0%;
+  left: 50%;
+  transform: translate(-43%, 0%);*/
+  width: 486px;
+  margin: 30px auto;
+/*  margin-top: 30px;*/
+}
+
+div.layout-wrapper {
+  min-width: 486px;
+  margin: 5px 20px;
+}
+
+li a {
+  text-decoration: underline;
+}
+
