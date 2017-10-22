@@ -9,7 +9,7 @@ class User < ApplicationRecord
                                 :reject_if => :all_blank, 
                                 :allow_destroy => :true
 
- #  validate :required_question_was_answered
+  # validate :required_question_was_answered
 
  #  def required_question_was_answered
  #    multi_qs.each do |q| 

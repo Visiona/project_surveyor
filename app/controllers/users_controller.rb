@@ -23,7 +23,7 @@ class UsersController < ApplicationController
       choices_ids = [choices_ids] unless choices_ids.is_a?(Array)
       choices_ids.each {|ch| @user.multi_answers.build(:multi_q_id => param_multi_q_id.to_i, :choice_id => ch) }
     end
-
+    params[:user][:multi_answers_attributes] = multi_answers_attrs 
     if @user.save
       flash[:success] = "Thank you for submitting your survey."
       redirect_to root_path

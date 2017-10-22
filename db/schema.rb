@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 20170524223639) do
 
   create_table "multi_answers", force: :cascade do |t|
     t.integer  "user_id",    null: false
-    t.integer  "choice_id",  null: false
+    t.integer  "choice_id"
     t.integer  "multi_q_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

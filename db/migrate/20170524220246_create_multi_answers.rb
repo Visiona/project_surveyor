@@ -2,7 +2,7 @@ class CreateMultiAnswers < ActiveRecord::Migration[5.0]
   def change
     create_table :multi_answers do |t|
       t.integer :user_id, :null => false
-      t.integer :choice_id, :null => false
+      t.integer :choice_id #, :null => false
       t.integer :multi_q_id, :null => false
 
       t.timestamps
